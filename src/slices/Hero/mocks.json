@@ -1,0 +1,36 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "World"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Do id aliqua id duis commodo cillum nulla sit nulla eiusmod. Anim sunt amet labore eu exercitation magna elit enim duis ullamco. Ad occaecat est dolore qui occaecat qui nisi deserunt ut culpa eiusmod."
+						}
+					}
+				]
+			},
+			"buy_button_text": {
+				"__TYPE__": "FieldContent",
+				"value": "fresh",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]
