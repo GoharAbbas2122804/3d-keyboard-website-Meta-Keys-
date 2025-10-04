@@ -69,7 +69,10 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type HomepageDocumentDataSlicesSlice = HeroSlice;
+type HomepageDocumentDataSlicesSlice =
+  | KeyBoardColorSelectorSlice
+  | BentoBoxSlice
+  | HeroSlice;
 
 /**
  * Content for HomePage documents
@@ -137,6 +140,96 @@ export type HomepageDocument<Lang extends string = string> =
 export type AllDocumentTypes = HomepageDocument;
 
 /**
+ * Item in *BentoBox → Default → Primary → items*
+ */
+export interface BentoBoxSliceDefaultPrimaryItemsItem {
+  /**
+   * Size field in *BentoBox → Default → Primary → items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bento_box.default.primary.items[].size
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  size: prismic.SelectField<"Small" | "Medium" | "Large">;
+
+  /**
+   * image field in *BentoBox → Default → Primary → items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bento_box.default.primary.items[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Text field in *BentoBox → Default → Primary → items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bento_box.default.primary.items[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *BentoBox → Default → Primary*
+ */
+export interface BentoBoxSliceDefaultPrimary {
+  /**
+   * heading field in *BentoBox → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bento_box.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * items field in *BentoBox → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bento_box.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<BentoBoxSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for BentoBox Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BentoBoxSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<BentoBoxSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BentoBox*
+ */
+type BentoBoxSliceVariation = BentoBoxSliceDefault;
+
+/**
+ * BentoBox Shared Slice
+ *
+ * - **API ID**: `bento_box`
+ * - **Description**: BentoBox
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BentoBoxSlice = prismic.SharedSlice<
+  "bento_box",
+  BentoBoxSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -198,6 +291,61 @@ type HeroSliceVariation = HeroSliceDefault;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Primary content in *KeyBoardColorSelector → Default → Primary*
+ */
+export interface KeyBoardColorSelectorSliceDefaultPrimary {
+  /**
+   * Heading field in *KeyBoardColorSelector → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: key_board_color_selector.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *KeyBoardColorSelector → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: key_board_color_selector.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for KeyBoardColorSelector Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type KeyBoardColorSelectorSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<KeyBoardColorSelectorSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *KeyBoardColorSelector*
+ */
+type KeyBoardColorSelectorSliceVariation = KeyBoardColorSelectorSliceDefault;
+
+/**
+ * KeyBoardColorSelector Shared Slice
+ *
+ * - **API ID**: `key_board_color_selector`
+ * - **Description**: KeyBoardColorSelector
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type KeyBoardColorSelectorSlice = prismic.SharedSlice<
+  "key_board_color_selector",
+  KeyBoardColorSelectorSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -223,10 +371,19 @@ declare module "@prismicio/client" {
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      BentoBoxSlice,
+      BentoBoxSliceDefaultPrimaryItemsItem,
+      BentoBoxSliceDefaultPrimary,
+      BentoBoxSliceVariation,
+      BentoBoxSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      KeyBoardColorSelectorSlice,
+      KeyBoardColorSelectorSliceDefaultPrimary,
+      KeyBoardColorSelectorSliceVariation,
+      KeyBoardColorSelectorSliceDefault,
     };
   }
 }
