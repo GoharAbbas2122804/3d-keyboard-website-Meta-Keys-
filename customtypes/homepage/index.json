@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "slice_playground": {
+              "type": "SharedSlice"
+            },
             "key_board_color_selector": {
               "type": "SharedSlice"
             },

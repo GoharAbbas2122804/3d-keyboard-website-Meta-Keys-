@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type HomepageDocumentDataSlicesSlice =
+  | SlicePlaygroundSlice
   | KeyBoardColorSelectorSlice
   | BentoBoxSlice
   | HeroSlice;
@@ -137,7 +138,46 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HomepageDocument;
+/**
+ * Content for Switch documents
+ */
+interface SwitchDocumentData {
+  /**
+   * Name field in *Switch*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: switch.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * HexColor field in *Switch*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: switch.color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  color: prismic.ColorField;
+}
+
+/**
+ * Switch document from Prismic
+ *
+ * - **API ID**: `switch`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SwitchDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<SwitchDocumentData>, "switch", Lang>;
+
+export type AllDocumentTypes = HomepageDocument | SwitchDocument;
 
 /**
  * Item in *BentoBox → Default → Primary → items*
@@ -346,6 +386,160 @@ export type KeyBoardColorSelectorSlice = prismic.SharedSlice<
   KeyBoardColorSelectorSliceVariation
 >;
 
+/**
+ * Item in *Marquee → Default → Primary → phrases*
+ */
+export interface MarqueeSliceDefaultPrimaryPhrasesItem {
+  /**
+   * Text field in *Marquee → Default → Primary → phrases*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: marquee.default.primary.phrases[].text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  text: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Marquee → Default → Primary*
+ */
+export interface MarqueeSliceDefaultPrimary {
+  /**
+   * Direction field in *Marquee → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: marquee.default.primary.direction
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  direction: prismic.SelectField<"left" | "right">;
+
+  /**
+   * phrases field in *Marquee → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: marquee.default.primary.phrases[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  phrases: prismic.GroupField<Simplify<MarqueeSliceDefaultPrimaryPhrasesItem>>;
+}
+
+/**
+ * Default variation for Marquee Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MarqueeSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MarqueeSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Marquee*
+ */
+type MarqueeSliceVariation = MarqueeSliceDefault;
+
+/**
+ * Marquee Shared Slice
+ *
+ * - **API ID**: `marquee`
+ * - **Description**: Marquee
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MarqueeSlice = prismic.SharedSlice<
+  "marquee",
+  MarqueeSliceVariation
+>;
+
+/**
+ * Item in *SwitchPlayground → Default → Primary → Switches*
+ */
+export interface SlicePlaygroundSliceDefaultPrimarySwitchesItem {
+  /**
+   * Switch field in *SwitchPlayground → Default → Primary → Switches*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: slice_playground.default.primary.switches[].switch
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  switch: ContentRelationshipFieldWithData<
+    [{ id: "switch"; fields: ["name", "color"] }]
+  >;
+}
+
+/**
+ * Primary content in *SwitchPlayground → Default → Primary*
+ */
+export interface SlicePlaygroundSliceDefaultPrimary {
+  /**
+   * Heading field in *SwitchPlayground → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: slice_playground.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *SwitchPlayground → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: slice_playground.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Switches field in *SwitchPlayground → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: slice_playground.default.primary.switches[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  switches: prismic.GroupField<
+    Simplify<SlicePlaygroundSliceDefaultPrimarySwitchesItem>
+  >;
+}
+
+/**
+ * Default variation for SwitchPlayground Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SlicePlaygroundSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SlicePlaygroundSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SwitchPlayground*
+ */
+type SlicePlaygroundSliceVariation = SlicePlaygroundSliceDefault;
+
+/**
+ * SwitchPlayground Shared Slice
+ *
+ * - **API ID**: `slice_playground`
+ * - **Description**: SlicePlayground
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SlicePlaygroundSlice = prismic.SharedSlice<
+  "slice_playground",
+  SlicePlaygroundSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -370,6 +564,8 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      SwitchDocument,
+      SwitchDocumentData,
       AllDocumentTypes,
       BentoBoxSlice,
       BentoBoxSliceDefaultPrimaryItemsItem,
@@ -384,6 +580,16 @@ declare module "@prismicio/client" {
       KeyBoardColorSelectorSliceDefaultPrimary,
       KeyBoardColorSelectorSliceVariation,
       KeyBoardColorSelectorSliceDefault,
+      MarqueeSlice,
+      MarqueeSliceDefaultPrimaryPhrasesItem,
+      MarqueeSliceDefaultPrimary,
+      MarqueeSliceVariation,
+      MarqueeSliceDefault,
+      SlicePlaygroundSlice,
+      SlicePlaygroundSliceDefaultPrimarySwitchesItem,
+      SlicePlaygroundSliceDefaultPrimary,
+      SlicePlaygroundSliceVariation,
+      SlicePlaygroundSliceDefault,
     };
   }
 }
