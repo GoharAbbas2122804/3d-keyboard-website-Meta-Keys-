@@ -26,7 +26,7 @@
         "phrases": {
           "type": "Group",
           "config": {
-            "label": "phrases",
+            "label": "Phrases",
             "repeat": true,
             "fields": {
               "text": {

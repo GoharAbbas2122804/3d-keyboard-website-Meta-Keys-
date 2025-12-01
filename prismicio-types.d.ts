@@ -387,11 +387,11 @@ export type KeyBoardColorSelectorSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *Marquee → Default → Primary → phrases*
+ * Item in *Marquee → Default → Primary → Phrases*
  */
 export interface MarqueeSliceDefaultPrimaryPhrasesItem {
   /**
-   * Text field in *Marquee → Default → Primary → phrases*
+   * Text field in *Marquee → Default → Primary → Phrases*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -416,7 +416,7 @@ export interface MarqueeSliceDefaultPrimary {
   direction: prismic.SelectField<"left" | "right">;
 
   /**
-   * phrases field in *Marquee → Default → Primary*
+   * Phrases field in *Marquee → Default → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*

@@ -1,10 +1,10 @@
 import { Keyboard } from "@/components/Keyboards";
 import { Stage, useTexture } from "@react-three/drei";
-import { group } from "console";
+
 import { KEYCAP_TEXTURES } from ".";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { array, texture } from "three/tsl";
+
 import { useGSAP, } from "@gsap/react";
 import gsap from "gsap";
 
@@ -34,7 +34,7 @@ const Scene = ({ selectedTextureId, onAnimationComplete }: SceneProps) => {
     useGSAP(() => {
         // Animate the KeyBoard 
         if (!keyboardRef.current || selectedTextureId === currentTextureId) return;
-        let mm = gsap.matchMedia();
+        const mm = gsap.matchMedia();
         mm.add("prefers-reduced-motion: no-preference", () => {
             const keyboard = keyboardRef.current;
             if (!keyboard) return;

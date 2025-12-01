@@ -1,5 +1,5 @@
 'use client';
-import { Children, FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/components/Bounded";
@@ -91,8 +91,8 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       gsap.set(".hero-heading, .hero-body", { opacity: 1 });
     });
   });
-  
-   return (
+
+  return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}

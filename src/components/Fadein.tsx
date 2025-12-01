@@ -3,7 +3,7 @@ import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
