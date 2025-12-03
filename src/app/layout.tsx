@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Roboto_Flex } from "next/font/google";
 import './globals.css';
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { PrismicPreview } from "@prismicio/next";
+import { repositoryName } from "@/prismicio";
 
 const robotoflex = Roboto_Flex({
   variable: "--font-roboto-flex",
   subsets: ["latin"],
   display: "swap",
-  axes: ['wdth', 'slnt', 'opsz' ]
+  axes: ['wdth', 'slnt', 'opsz']
 });
 
 
@@ -26,8 +30,13 @@ export default function RootLayout({
       <body
         className={`${robotoflex.variable} antialiased`}
       >
-        {children}
+        <Navbar />
+        <main>
+          {children}
+        </main>
+        <Footer />
       </body>
+      <PrismicPreview repositoryName={repositoryName} />
     </html>
   );
 }

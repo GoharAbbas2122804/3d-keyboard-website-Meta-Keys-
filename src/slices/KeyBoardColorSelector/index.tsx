@@ -92,6 +92,7 @@ const KeyBoardColorSelector: FC<KeyBoardColorSelectorProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="relative flex h-[90vh] min-h-[1000px] flex-col  overflow-hidden bg-linear-to-br from-[#0f172a] to-[#062f4a] text-white"
+      id="keycap-changer"
     >
       {/* SVG Background color for the colorselector component */}
       <svg className="pointer-events-none absolute top-0 left-0 h-auto w-full mix-blend-overlay " 
