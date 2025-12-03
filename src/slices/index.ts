@@ -7,5 +7,6 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   key_board_color_selector: dynamic(() => import("./KeyBoardColorSelector")),
   marquee: dynamic(() => import("./Marquee")),
+  purchase_button: dynamic(() => import("./PurchaseButton")),
   slice_playground: dynamic(() => import("./SwitchPlayground")),
 };

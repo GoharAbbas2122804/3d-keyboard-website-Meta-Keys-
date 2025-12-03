@@ -1,6 +1,8 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { LogoMark } from "@/components/LogoMark";
+import clsx from "clsx";
 
 /**
  * Props for `Marquee`.
@@ -11,40 +13,45 @@ export type MarqueeProps = SliceComponentProps<Content.MarqueeSlice>;
  * Component for "Marquee" Slices.
  */
 const Marquee: FC<MarqueeProps> = ({ slice }) => {
+  const MarqueeContent = () => (
+    <div className="flex items-center bg-gray-200 py-10 whitespace-nowrap">
+      {slice.primary.phrases.map((item, i) => (
+        <Fragment key={i}>
+          <div className="font-bold-slanted px-14 text-[180px] leading-none text-gray-400/80 uppercase [text-box:trim-both_cap_alphabetic] md:text-[260px]">
+            {item.text}
+          </div>
+          <LogoMark className="size-36 flex-shrink-0" />
+        </Fragment>
+      ))}
+    </div>
+  );
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for marquee (variation: {slice.variation}) slices.
-      <br />
-      <strong>You can edit this slice directly in your code editor.</strong>
-      {/**
-       * 💡 Use Prismic MCP with your code editor
-       *
-       * Get AI-powered help to build your slice components — based on your actual model.
-       *
-       * ▶️ Setup:
-       * 1. Add a new MCP Server in your code editor:
-       *
-       * {
-       *   "mcpServers": {
-       *     "Prismic MCP": {
-       *       "command": "npx",
-       *       "args": ["-y", "@prismicio/mcp-server@latest"]
-       *     }
-       *   }
-       * }
-       *
-       * 2. Select a model optimized for coding (e.g. Claude 3.7 Sonnet or similar)
-       *
-       * ✅ Then open your slice file and ask your code editor:
-       *    "Code this slice"
-       *
-       * Your code editor reads your slice model and helps you code faster ⚡
-       * 🎙️ Give your feedback: https://community.prismic.io/t/help-us-shape-the-future-of-slice-creation/19505
-       * 📚 Documentation: https://prismic.io/docs/ai#code-with-prismics-mcp-server
-       */}
+      <div
+        className="relative flex w-full items-center overflow-hidden select-none"
+        aria-hidden="true"
+        role="presentation"
+      >
+        <div className="relative flex items-center whitespace-nowrap">
+          <div
+            className={clsx(
+              "marquee-track animate-marquee flex",
+              slice.primary.direction === "right" &&
+                "[animation-direction:reverse]",
+            )}
+          >
+            {/* Content to duplicate */}
+            <MarqueeContent />
+            <MarqueeContent />
+            <MarqueeContent />
+            <MarqueeContent />
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

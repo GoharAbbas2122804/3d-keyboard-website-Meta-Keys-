@@ -26,7 +26,7 @@
 
 .animate-marquee {
   animation-name: marquee;
-  animation-duration: 30s;
+  animation-duration: 90s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
