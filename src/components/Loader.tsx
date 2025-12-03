@@ -225,6 +225,9 @@ export function Loader() {
                     </g>
                 </g>
             </svg>
+            <p className="font-bold-slanted animate-pulse text-xl uppercase text-white opacity-50">
+                Loading...
+            </p>
         </div>
     );
 }

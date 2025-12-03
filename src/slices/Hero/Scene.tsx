@@ -78,7 +78,24 @@ export function Scene() {
   const keyboardAnimationRef = useRef<KeyboardRefs>(null);
   const [lightIntensityScaler, setLightIntensityScaler] = useState(0);
 
-  const scalingFactor = window.innerWidth <= 500 ? 0.5 : 1;
+  const { width } = useThree((state) => state.size);
+  const [scalingFactor, setScalingFactor] = useState(1);
+
+  useEffect(() => {
+    // Dynamic scaling logic based on viewport width
+    // Mobile (< 768px): Scale down significantly
+    // Tablet (768px - 1024px): Scale down slightly
+    // Desktop (> 1024px): Full scale
+    if (width < 500) {
+      setScalingFactor(0.5);
+    } else if (width < 768) {
+      setScalingFactor(0.6);
+    } else if (width < 1024) {
+      setScalingFactor(0.8);
+    } else {
+      setScalingFactor(1);
+    }
+  }, [width]);
 
   useGSAP(() => {
     const mm = gsap.matchMedia();

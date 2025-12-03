@@ -13,7 +13,6 @@ import {
     DialogPortal,
     DialogOverlay,
 } from "@radix-ui/react-dialog";
-import { Logo } from "./Logo";
 import clsx from "clsx";
 import { checkout } from "@/checkout";
 
@@ -46,6 +45,7 @@ export function Navbar() {
                 <button
                     ref={button}
                     onClick={handleCheckout}
+                    aria-label="Checkout"
                     className={clsx(
                         "group relative flex h-12 transform-gpu cursor-pointer items-center justify-center overflow-hidden rounded bg-gradient-to-r from-[#01A7E1] to-[#0196C9] px-6 py-2.5 font-semibold text-white will-change-transform hover:shadow-lg hover:shadow-[#01A7E1]/25 focus:ring-2 focus:ring-[#01A7E1] focus:ring-offset-2 focus:outline-none disabled:grayscale motion-safe:transition-all motion-safe:duration-300 md:text-base",
                         "before:absolute before:inset-0 before:translate-x-[-100%] before:bg-gradient-to-r before:from-white/0 before:via-white/20 before:to-white/0 before:ease-out hover:before:translate-x-[100%] motion-safe:before:transition-transform motion-safe:before:duration-700",
@@ -57,7 +57,7 @@ export function Navbar() {
                     </span>
                 </button>
                 <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogTrigger className="flex size-12 cursor-pointer items-center justify-center rounded bg-gray-300 hover:bg-gray-300/80 hover:shadow-lg hover:shadow-black/10 motion-safe:transition">
+                    <DialogTrigger aria-label="Open menu" className="flex size-12 cursor-pointer items-center justify-center rounded bg-gray-300 hover:bg-gray-300/80 hover:shadow-lg hover:shadow-black/10 motion-safe:transition">
                         <LuMenu className="size-5" />
                         <span className="sr-only">Toggle menu</span>
                     </DialogTrigger>
