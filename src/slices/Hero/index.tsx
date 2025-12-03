@@ -23,7 +23,8 @@ function LoaderWrapper() {
     if (active) {
       setIsLoading(true);
     } else {
-      const timer = setTimeout(() => setIsLoading(false), 100);
+      // Add a small buffer to ensure smooth transition and avoid flickering
+      const timer = setTimeout(() => setIsLoading(false), 500);
       return () => clearTimeout(timer);
     }
   }, [active]);
@@ -31,7 +32,7 @@ function LoaderWrapper() {
   return (
     <div
       className={clsx(
-        "motion-safe:transition-opacity motion-safe:duration-700",
+        "absolute inset-0 z-50 flex items-center justify-center bg-slate-900 transition-opacity duration-700",
         isLoading ? "opacity-100" : "pointer-events-none opacity-0",
       )}
     >

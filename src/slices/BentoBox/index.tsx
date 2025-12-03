@@ -33,7 +33,7 @@ const BentoBox: FC<BentoBoxProps> = ({ slice }) => {
         </h2>
       </FadeIn>
 
-      <FadeIn  targetChildren className="grid grid-cols-1 gap-4 md:grid-cols-6">
+      <FadeIn targetChildren className="grid grid-cols-1 gap-4 md:grid-cols-6">
         {slice.primary.items.map((item) => (
           <BentoBoxItem key={asText(item.text)} item={item} />
         ))}
@@ -63,6 +63,7 @@ function BentoBoxItem({ item }: BentoBoxItemProps) {
         className="h-full w-full object-cover"
         quality={96}
         width={700}
+        fallbackAlt=""
       />
 
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-black"></div>

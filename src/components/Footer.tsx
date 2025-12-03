@@ -113,6 +113,12 @@ export function Footer() {
 
                 <div className="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
                     <p>&copy; {new Date().getFullYear()} MetaData. All rights reserved.</p>
+                    <p className="mt-2">
+                        Developed by <span className="text-white">GoharAbbas</span> |{" "}
+                        <a href="mailto:GoharAbbas2122804@gmail.com" className="hover:text-[#01A7E1] transition-colors">
+                            GoharAbbas2122804@gmail.com
+                        </a>
+                    </p>
                 </div>
             </div>
         </footer>
