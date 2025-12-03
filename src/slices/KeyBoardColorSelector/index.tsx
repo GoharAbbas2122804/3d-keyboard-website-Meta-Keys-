@@ -73,7 +73,9 @@ const KeyBoardColorSelector: FC<KeyBoardColorSelectorProps> = ({ slice }) => {
 
 
   const handleTextureSelect = (texture:keycapTexture) =>{
+
     if(texture.id === selectesTextureId || isAnimating) return;
+    setisAnimating(true);
 
     setSelectedTextureId(texture.id);
     setBackgroundText(Array.from({length: 10}, () => KEYCAP_TEXTURES.find((t)=> t.id === texture.id)?.name || "").join(" "));
@@ -121,7 +123,6 @@ const KeyBoardColorSelector: FC<KeyBoardColorSelectorProps> = ({ slice }) => {
         <div className="max-w-md shirnk-0">
           <h2 className="font-bold-slanted mb-1 text-4xl uppercase md:mb-2 lg:text-6xl">
             <PrismicText field={slice.primary.heading} />
-
           </h2>
           <div className="text-pretty lg:text-lg">
             <PrismicRichText field={slice.primary.description} />
@@ -131,6 +132,7 @@ const KeyBoardColorSelector: FC<KeyBoardColorSelectorProps> = ({ slice }) => {
           {KEYCAP_TEXTURES.map((texture)=>(
             <li key={texture.id}>
               <button 
+              disabled={isAnimating}
               onClick={()=>handleTextureSelect(texture)}
               className={clsx("flex aspect-square flex-col items-center justify-center rounded-lg border-2 p-4 hover:scale-105 motion-safe:transition-all motion-safe:duration-300 ", 
                 selectesTextureId === texture.id ? 'border-[#81BFED] bg-[#81BFED]/20 ': 'cursor-pointer border-gray-300 hover:border-gray-500 ', 
